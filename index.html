@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<meta name="apple-mobile-web-app-capable" content-"yes" />
+<link rel="apple-touch-icon" href="http://codeup.space/editor-" />
+<title>Pflanzprojekt</title>
+<div class="sidebar">
+    <h1><a href="https://github.com/jonasistauchdabei/pflanzprojekt">github</a></h1>
+    <a href="/contact">Kontakt</a>
+    <h1>Pflanzprojekt</h1>
+    <h2>Gründe/Probleme</h2>
+<h4>Ich hatte mir überlegt, dass eine automatische Pflanzenbewässerungsanlage z.b. für Fassaden eine gute Idee wäre. Dann hatte ich online nur teuer Lösungen gefunden, außerdem habe ich Lust am Experimentieren.</h4>
+<h2>Nachbauanleitung</h2>
+<h3>Raspberry Pi imiger installertion + Homeassistant insterllation</h3>
+<video width="100%" height="350" controls>
+<source src="https://github.com/jonasistauchdabei/pflanzprojekt/raw/main/Raspberry%20Pi%20imiger%20installertion%20Homeassistant%20insterllation.mp4" type="video/mp4"></source>
+</video>
+<h2>config yamel esphome</h2>
+ <pre>
+<code>
+esphome:
+
+  name: pflanzprojekt
+
+  friendly_name: Pflanzprojekt
+
+#verwendetes Bord
+
+esp32:
+
+  board: esp32dev
+
+  framework:
+
+    type: arduino
+
+#Arduinino ide
+
+# Enable logging
+
+logger:
+
+web_server:
+
+  port: 80
+
+  css_include: ./0.css
+
+# Aktiviren von Home Assistant API für alle die Home assistant nutzen
+
+api:
+
+  encryption:
+
+    key: "Euer homeassistant key wenn man das adonn Esphome insterliert vunktioniert es automatisch"
+
+# Dratlossen Update in den Code schreiben
+
+ota:
+
+  password: "Euer Passwort"
+
+# ssid Wlan name
+
+# Wlan Password
+
+wifi:
+
+  ssid: !secret wifi_ssid
+
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+
+  ap:
+
+    ssid: "Pflanzprojekt Fallback Hotspot"
+
+    password: "Pflanzprojekt007"
+
+# dht adafrut Bibliotek temperatur
+
+captive_portal:
+
+sensor:
+
+  - platform: dht
+
+    pin: 5
+
+    temperature:
+
+      name: "Pflanzentemperatur"
+
+    humidity:
+
+      name: "Pflanzenluftfeuchtigkeit"
+
+  - platform: internal_temperature
+
+    name: "Internal Temperature"
+
+# switch darf nur einmalgenant werden
+
+# Relai (für die Pumpen)
+
+switch:
+
+  - platform: gpio
+
+    name: "Bewässerung"
+
+    pin: 13
+
+  - platform: gpio
+
+    name: "Bewässerung2"
+
+    pin: 14
+</code>
+</pre>
+<h1>Wenn irgend etwas unklar war hier mein Kontakt <a href="/contact">Kontakt</a> </h1>
+
